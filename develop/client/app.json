@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/attention/attention",
+    "pages/collection/collection",
+    "pages/personal-center/personal-center"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#405f80"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home2.png"
+      },
+      {
+        "pagePath": "pages/attention/attention",
+        "text": "关注",
+        "iconPath": "images/icon/attention.png",
+        "selectedIconPath": "images/icon/attention2.png"
+      },
+      {
+        "pagePath": "pages/collection/collection",
+        "text": "收藏",
+        "iconPath": "images/icon/collect.png",
+        "selectedIconPath": "images/icon/collect2.png"
+      },
+      {
+        "pagePath": "pages/personal-center/personal-center",
+        "text": "个人中心",
+        "iconPath": "images/icon/own.png",
+        "selectedIconPath": "images/icon/own2.png"
+      }
+    ]
+  }
+}
