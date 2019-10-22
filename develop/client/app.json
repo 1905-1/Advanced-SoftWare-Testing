@@ -36,5 +36,6 @@
         "selectedIconPath": "images/icon/own2.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
