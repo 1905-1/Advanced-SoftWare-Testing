@@ -1,0 +1,20 @@
+<!-- 攻略详情页 -->
+<view class="container">
+  <image class="head-image" src="{{headImgSrc}}"></image>
+  <view class="author-date">
+    <image class="avatar" src="{{author_img}}"></image>
+    <text class="author">{{author}}</text>
+    <text class="const-text">发表于</text>
+    <text class="date">{{dateTime}}</text>
+  </view>
+  <text class="title">{{title}}</text>
+  <view class="tool">
+    <view class="circle-img">
+      <image class="support-img" src="/images/icon/support.png"></image>
+      <image class="collect-img" src="/images/icon/collect.png"></image>
+      <image class="share-img" src="/images/icon/share.png"></image>
+      <view class="horizon"></view>
+    </view>
+  </view>
+  <text class="detail">{{detail}}</text>
+</view>
