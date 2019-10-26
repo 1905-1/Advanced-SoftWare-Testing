@@ -19,9 +19,10 @@ Page({
 
   onPostTap: function (event) {
     var postId = event.currentTarget.dataset.postid;
+    var authorId = event.currentTarget.dataset.authorid;
     // console.log("on post id is" + postId);
     wx.navigateTo({
-      url: '../index/index-detail/index-detail?id=' + postId
+      url: '../index/index-detail/index-detail?postId=' + postId + '&authorId=' + authorId
     })
   },
 
