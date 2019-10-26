@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/attention/attention",
     "pages/collection/collection",
-    "pages/personal-center/personal-center"
+    "pages/personal-center/personal-center",
+    "pages/index/index-detail/index-detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#405f80"

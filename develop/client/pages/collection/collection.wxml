@@ -1,2 +1,11 @@
 <!--pages/collection/collection.wxml-->
-<text>pages/collection/collection.wxml</text>
+<import src="/pages/index/index-item/index-item-template.wxml" />
+
+<view>
+  <block wx:for="{{posts_key}}" wx:for-item="item">
+    <!-- template -->
+    <view wx:if="{{collected[item.postId]}}" catchtap="onPostTap" data-postId="{{item.postId}}" data-authorId="{{item.authorId}}">
+      <template is="postItem" data="{{...item}}" />
+    </view>
+  </block>
+</view>

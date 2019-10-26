@@ -1,1 +1,3 @@
 /* pages/collection/collection.wxss */
+@import "/pages/index/index-item/index-item-template.wxss";
+

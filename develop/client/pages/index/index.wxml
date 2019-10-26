@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <import src="index-item/index-item-template.wxml" />
 <view>
+  <mp-searchbar placeholder="请输入关键字搜索" bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
   <swiper indicator-dots="true" autoplay="true" interval="2000">
     <swiper-item>
       <image src='/images/place/hanjie.jpg'></image>
@@ -14,6 +15,8 @@
   </swiper>
   <block wx:for="{{posts_key}}" wx:for-item="item">
     <!-- template -->
-    <template is="postItem" data="{{...item}}" />
+    <view catchtap="onPostTap" data-postId="{{item.postId}}" data-authorId="{{item.authorId}}">
+      <template is="postItem" data="{{...item}}" />
+    </view>
   </block>
 </view>
