@@ -6,13 +6,16 @@
     <text class="author">{{author}}</text>
     <text class="const-text">发表于</text>
     <text class="date">{{dateTime}}</text>
+    <image wx:if="{{concerned}}" catchtap="onConcernTap" class="attention-img" src="/images/icon/noattention.png"></image>
+    <image wx:else catchtap="onConcernTap" class="attention-img" src="/images/icon/attention3.png"></image>
   </view>
   <text class="title">{{title}}</text>
   <view class="tool">
     <view class="circle-img">
-      <image class="support-img" src="/images/icon/support.png"></image>
-      <image class="collect-img" src="/images/icon/collect.png"></image>
-      <image class="share-img" src="/images/icon/share.png"></image>
+      <image wx:if="{{supported}}" catchtap="onSupportTap" class="support-img" src="/images/icon/support2.png"></image>
+      <image wx:else catchtap="onSupportTap" class="support-img" src="/images/icon/support3.png"></image>
+      <image wx:if="{{collected}}" catchtap="onCollectionTap" class="collect-img" src="/images/icon/collect3.png"></image>
+      <image wx:else catchtap="onCollectionTap" class="collect-img" src="/images/icon/collect.png"></image>
       <view class="horizon"></view>
     </view>
   </view>

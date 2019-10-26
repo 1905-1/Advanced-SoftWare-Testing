@@ -37,9 +37,16 @@
 
 .date{
   font-size: 24rpx;
-  margin-left: 30rpx;
+  margin-left: 20rpx;
   vertical-align: middle;
   color: #999;
+}
+
+.attention-img{
+  height: 50rpx;
+  width: 100rpx;
+  vertical-align: middle;
+  margin-left: 30rpx;
 }
 
 .title{
@@ -68,16 +75,16 @@
 }
 
 .support-img{
-  margin-left: 400rpx;
+  margin-left: 500rpx;
 }
 
 .collect-img{
   margin-left: 30rpx;
 }
 
-.share-img{
+/* .share-img{
   margin-left: 30rpx;
-}
+} */
 
 .horizon{
   width: 660rpx;
