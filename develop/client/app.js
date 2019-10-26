@@ -1,8 +1,9 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var _that = this
+    _that.isTokenUseful = true;
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -14,21 +15,25 @@ App({
         //如果有token直接请求userinfo
         wx.request({
           url: _that.globalData.urlPath + 'user/userinfo',
-          data: {
-          },
+          data: {},
           header: {
             'content-type': 'application/json',
-            'token': _that.globalData.token
+            'Authorization': _that.globalData.token
           },
           method: 'post',
-          success: function (res) {
-            console.log(res.data);
-            _that.globalData.wxAccout = res.data.wxAccout;
+          success: function(res) {
+            console.log(res.data)
+            _that.globalData.wxAccount = res.data.wxAccount
+          },
+          fail: function(res) {
+            //token失效
+            _that.isTokenUseful = false
           }
         })
       },
-      fail: function (error){
-        console.log("getStorage:"+error.errMsg)
+      fail: function(error) {
+        console.log("getStorage:" + error.errMsg)
+        _that.isTokenUseful = false
       }
     })
 
@@ -49,7 +54,41 @@ App({
               }
 
               //如果没有token，用户已经授权登录的情况下，就请求token
-              
+              if (_that.isTokenUseful == false){
+                UserLogin();
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+  UserLogin: function() {
+    //插入登录的用户的相关信息到数据库
+    wx.login({
+      success(res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: this.globalData.urlPath + 'user/login',
+            data: JSON.stringify({
+              code: res.code,
+              userInfo: this.globalData.userInfo
+            }),
+            method: 'post',
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function(res) {
+              console.log("插入小程序登录用户信息成功！");
+              console.log(res);
+              //保存token
+              this.globalData.token = res.data.token;
+              this.globalData.wxAccount = res.data.account;
+              wx.setStorageSync("token", res.data.token);
+            },
+            fail: function(error) {
+              console.log(error);
             }
           })
         }
@@ -58,10 +97,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    urlPath:'http://127.0.0.1:8080/api/wx/',
+    urlPath: 'http://127.0.0.1:8080/api/wx/',
     //token要设置请求头中  
-    token:null,
+    token: null,
     //代表后端中用户信息，请求用这个 wxOpenid,或者id
-    wxAccout:null
+    wxAccount: null
   }
 })

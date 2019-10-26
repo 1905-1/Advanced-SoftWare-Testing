@@ -1,13 +1,14 @@
 //index.js
 var postData = require('../../data/posts-data.js')
-
+var testData = require('../../data/posttest.js')
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    test:{}
   },
 
   /**
@@ -16,7 +17,8 @@ Page({
   onLoad: function (options) {
 
     this.setData({
-      posts_key: postData.postList
+      posts_key: postData.postList,
+      test: testData.postList
     })
   },
 
@@ -31,7 +33,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // console.log(this.data.test[0]);
+    // for (var i = 0; i < this.data.test.length; i++) {
+    //   wx.uploadFile({
+    //     url: app.globalData.urlPath + 'article/add',
+    //     filePath: this.data.test[i].coverimg,
+    //     name: "img",
+    //     header:{
+    //       'Authorization': app.globalData.token
+    //     },
+    //     formData: this.data.test[i],
+    //     success(res) {
+    //       console.log(res);
+    //     }
+    //   })
+    // }
   },
 
   /**

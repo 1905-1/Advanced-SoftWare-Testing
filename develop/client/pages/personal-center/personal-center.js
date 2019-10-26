@@ -107,10 +107,10 @@ Page({
             //发起网络请求
             wx.request({
               url: app.globalData.urlPath + 'user/login',
-              data: {
+              data: JSON.stringify({
                 code: res.code,
                 userInfo: app.globalData.userInfo
-              },
+              }),
               method:'post',
               header: {
                 'content-type': 'application/json'
@@ -120,6 +120,7 @@ Page({
                 console.log(res);
                 //保存token
                 app.globalData.token = res.data.token;
+                app.globalData.wxAccount = res.data.account;
                 wx.setStorageSync("token", res.data.token);
                 that.setData({
                   hasUserInfo:true,
