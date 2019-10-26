@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       posts_key: postData.postList,
-      test: testData.postList，
+      test: testData.postList,
       search: this.search.bind(this)
     })
   },
