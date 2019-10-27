@@ -243,3 +243,34 @@ lookUserId //查看的用户id
  @param size 一页大小 默认10条数据
  示例:
 > http://127.0.0.1:8080/api/wx/article/address?address=WH0001&page=0&size=10&lookUserId=1
+
+### 5.点赞某篇文章
+点赞某篇文章
+#### 获取方式
+Http GET
+#### 数据格式
+JSON
+#### 请求URL
+> app.globalData.urlPath + /api/wx/article/add/support <br>
+示例:
+> http://127.0.0.1:8080/api/wx/article/add/support?id=1&articleid=1
+#### 请求参数
+int id 用户id
+int articleid 文章id
+
+### 6.删除某篇文章
+示例:
+> http://127.0.0.1:8080/api/wx/article/delete/support?id=1&articleid=1
+
+### 7.文章热度
+文章热度 浏览及热度+1
+#### 获取方式
+Http GET
+#### 数据格式
+JSON
+#### 请求URL
+> app.globalData.urlPath + /api/wx/article/view <br>
+示例:
+> http://127.0.0.1:8080/api/wx/article/view?articleid=1
+#### 请求参数
+int articleid 文章id
