@@ -1,0 +1,32 @@
+
+
+## 请自行修改下面信息
+
+spring:
+  application:
+    name: shiro-jwt-applet
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update      # 请自行修改 请自行修改 请自行修改
+    open-in-view: false     # 关闭 OSIV
+
+
+#  datasource本地配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopping
+    username: root
+    password: 123456@cc
+    driver-class-name: com.mysql.jdbc.Driver
+
+#  redis本地配置 请自行配置
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+
+#  微信小程序配置 appid /appsecret
+wx:
+  applet:
+    appid: wxff7fc7244fca9391
+    appsecret: cac3b0e6cd88cbeac0e8346f726bf928
