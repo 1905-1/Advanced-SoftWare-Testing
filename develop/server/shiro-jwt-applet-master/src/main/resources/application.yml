@@ -28,5 +28,5 @@ spring:
 #  微信小程序配置 appid /appsecret
 wx:
   applet:
-    appid: wxff7fc7244fca9391
-    appsecret: cac3b0e6cd88cbeac0e8346f726bf928
+    appid: xxxxxxxxx
+    appsecret: xxxxxxxx
