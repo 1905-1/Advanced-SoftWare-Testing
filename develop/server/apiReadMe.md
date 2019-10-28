@@ -207,6 +207,35 @@ lookUserId //查看的用户id
  @param size 一页大小 默认10条数据
  示例:
 > http://127.0.0.1:8080/api/wx/article/hot?page=0&size=10&lookUserId=1
+#### 返回数据
+```
+    "status": 1,
+    "data": [
+        {
+            "article": {
+                "articleId": 5,
+                "title": "引领潮流的先锋---武商广场",
+                "date": "2019-10-25T09:09:58.000+0000",
+                "coverimg": "/upload/imgs/wushangSquare.jpg",
+                "content": "武商广场购物中心坐落于武汉市具有黄金商圈美誉的解放大道中段，作为武商”摩尔“商业城的主力百货”，秉持高级精致百货的定位和风貌，1996年开业以来连年蝉联”中国单体百货经济效益第一“，是中国最具影响力的高级百货之一。",
+                "supportnum": 0,
+                "playtime": 129,
+                "fee": 109,
+                "hotnum": 177
+            },
+            "issupport": false,
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqibiah3Yj5thYy07rMiaibb02x00Vza96Esd7ASQXmQG4nJpcJNLbf59jM3W8EdNtA2l0EC8BaJvZhuw/132",
+            "nickName": "C",
+            "address": {
+                "addressId": "WH004",
+                "desc": "",
+                "playtime": 96,
+                "fee": 112
+            }
+        }
+    ],
+    "msg": ""
+```
 
 ### 3.获得某个用户的所有文章
 获得某个用户的所有文章
