@@ -4,7 +4,7 @@
 <view>
   <block wx:for="{{posts_key}}" wx:for-item="item">
     <!-- template -->
-    <view wx:if="{{collected[item.postId]}}" catchtap="onPostTap" data-postId="{{item.postId}}" data-authorId="{{item.authorId}}">
+    <view wx:if="{{collected[item.article.articleId]}}" catchtap="onPostTap" data-postId="{{item.article.articleId}}" data-authorId="{{item.authorId}}" data-article="{{item}}">
       <template is="postItem" data="{{...item}}" />
     </view>
   </block>

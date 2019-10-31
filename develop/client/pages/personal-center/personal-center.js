@@ -22,7 +22,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      console.log(app.globalData.userInfo);
+      // console.log(app.globalData.userInfo);
     }
   },
 
@@ -43,7 +43,6 @@ Page({
         'token': app.globalData.token
       },
       success: function (res) {
-        console.log(res.data);
         getApp().globalData.userInfo = res.data;
       }
     })

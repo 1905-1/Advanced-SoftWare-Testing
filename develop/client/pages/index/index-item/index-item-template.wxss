@@ -54,7 +54,8 @@
   font-size: 26rpx;
   margin-left: 20rpx;
   display: flex;
-
+  flex-direction: row;
+  align-items: center;
 }
 
 .post-like-image{
@@ -66,5 +67,4 @@
 .post-like-font{
   margin-right: 40rpx;
   flex-direction: row;
-  align-items: center;
 }

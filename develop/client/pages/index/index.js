@@ -1,58 +1,83 @@
 //index.js
-var postData = require('../../data/posts-data.js')
-var testData = require('../../data/posttest.js')
+// var postData = require('../../data/posts-data.js')
+// var testData = require('../../data/posttest.js')
 var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
-    test:{}
-  },
+  data: {},
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.setData({
-      posts_key: postData.postList,
-      test: testData.postList,
-      search: this.search.bind(this)
-    })
+  onLoad: function(options) {
+
+
   },
 
-  search: function (value) {
+  search: function(value) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve([{ text: '搜索结果', value: 1 }, { text: '搜索结果2', value: 2 }])
+        resolve([{
+          text: '搜索结果',
+          value: 1
+        }, {
+          text: '搜索结果2',
+          value: 2
+        }])
       }, 200)
     })
   },
-  selectResult: function (e) {
+  selectResult: function(e) {
     console.log('select result', e.detail)
   },
 
-  onPostTap:function(event){
-    var postId = event.currentTarget.dataset.postid;
-    var authorId = event.currentTarget.dataset.authorid;
-    // console.log("on post id is" + postId);
-    wx.navigateTo({
-      url: 'index-detail/index-detail?postId=' + postId + '&authorId=' + authorId,
+  onPostTap: function(event) {
+    // 获取详情页数据
+    var article = event.currentTarget.dataset.article;
+    console.log(article)
+
+    var articleStr = JSON.stringify(article)
+    console.log(articleStr)
+
+    // 获取热度
+    wx.request({
+      url: app.globalData.urlPath + 'article/view',
+      data: {
+        articleid: article.article.articleId
+      },
+      header: {
+        // 'Authorization': app.globalData.token
+      },
+      method: 'get',
+      success(res) {
+        // console.log(res.data.data)
+      },
+      fail: error => function() {
+        console.log(error)
+      }
     })
+
+    // 绑定数据，页面跳转
+    wx.navigateTo({
+      url: 'index-detail/index-detail?articleStr=' + encodeURIComponent(articleStr)
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     // console.log(this.data.test[0]);
     // for (var i = 0; i < this.data.test.length; i++) {
     //   wx.uploadFile({
@@ -68,40 +93,70 @@ Page({
     //     }
     //   })
     // }
-  },
+    this.setData({
+      // posts_key: postData.postList,
+      // test: testData.postList,
+      search: this.search.bind(this)
+    })
 
+    var _that = this
+    wx.request({
+      url: app.globalData.urlPath + 'article/hot',
+      data: {
+        page: 0,
+        size: 10,
+        lookUserId: app.globalData.wxAccount == null ? -1 : app.globalData.wxAccount.id
+      },
+      header: {
+        // 'Authorization': app.globalData.token
+      },
+      method: 'get',
+      success(res) {
+        for (var i = 0; i < res.data.data.length; i++) {
+          res.data.data[i].article.coverimg = (app.globalData.imgPath).slice(0, -1) + res.data.data[i].article.coverimg
+          res.data.data[i].article.date = String(res.data.data[i].article.date).split('T')[0]
+        }
+        _that.setData({
+          posts_key: res.data.data
+        })
+      },
+      fail: error => function() {
+        console.log(error)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -1,5 +1,7 @@
 // pages/attention/attention.js
-var postData = require('../../data/users-data.js')
+// var postData = require('../../data/users-data.js')
+
+var app = getApp()
 
 Page({
 
@@ -28,12 +30,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      posts_key: postData.postList
-    })
-    var postsConcerned = wx.getStorageSync('post_concerned') //获取当前缓存值
-    this.setData({
-      concerned: postsConcerned
+    var _that = this
+    wx.request({
+      url: app.globalData.urlPath + 'get/follow',
+      data:{
+        id: app.globalData.wxAccount.id
+      },
+      header:{
+        'Authorization': app.globalData.token
+      },
+      method: 'get',
+      success(res) {
+        _that.setData({
+          posts_key: res.data.data
+        })
+      },
+      fail: error => function () {
+        console.log(error)
+      }
+
     })
   },
 

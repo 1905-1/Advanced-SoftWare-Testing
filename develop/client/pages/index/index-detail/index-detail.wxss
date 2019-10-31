@@ -104,3 +104,37 @@
   line-height: 44rpx;
   letter-spacing: 2px;
 }
+
+.fee{
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.playtime{
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.suggestion text{
+  color: #4b556c;
+}
+
+.map{
+  margin-left: 30rpx;
+  margin-right: 30rpx
+}
+
+.map text{
+  color: #4b556c;
+}
+
+
+
+
+
+
+

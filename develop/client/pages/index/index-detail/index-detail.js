@@ -1,4 +1,6 @@
-var postsData = require('../../../data/posts-data.js')
+// var postsData = require('../../../data/posts-data.js')
+
+var app = getApp()
 
 Page({
 
@@ -6,145 +8,224 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (option) {
-    var postId = option.postId   //获取文章id
-    this.data.currentPostId = postId  // 放入data中，方便后续函数调用
-    var postData = postsData.postList[postId]
-    var authorId = option.authorId // 取用户id
-    this.data.currentAuthorId = authorId
-    this.setData(postData)
+  onLoad: function(option) {
+    // var articleId = option.articleId
+    // var content = option.content
+    // var coverimg = option.coverimg
+    // var date = option.date
+    // var fee = option.fee
+    // var playtime = option.playtime
+    // var title = option.title
+    // var avatarUrl = option.avatarUrl
+    // var nickName = option.nickName
+    // var authorId = parseInt(option.authorId)
+    // var supported = (option.issupport =='true')
+    // var concerned = (option.isconcerned == 'true')
+    // var details = option.details
+    console.log(option.articleStr)
+    var article = JSON.parse(decodeURIComponent(option.articleStr));
+
+    console.log(article)
   
+    this.setData({
+      'articleId': article.article.articleId,
+      'authorId': article.authorId,
+      'date': article.article.date,
+      'fee': article.article.fee,
+      'playtime': article.article.playtime,
+      'title': article.article.title,
+      'avatarUrl': article.avatarUrl,
+      'nickName': article.nickName,
+      'content': article.article.content,
+      'coverimg': article.article.coverimg,
+      'supported': article.issupported,
+      'concerned': article.isconcerned,
+      'details': article.article.details
+    })
+
     var postCollected = wx.getStorageSync('post_collected')
-    var postSupported = wx.getStorageSync('post_supported')
-    var postConcerned = wx.getStorageSync('post_concerned')
-    if(postCollected){
-      var postCollected = postCollected[postId]
+    if (postCollected) {
+      var postCollected = postCollected[this.data.articleId]
       this.setData({
         collected: postCollected
       })
-    }
-    else{
+    } else {
       var postCollected = {}
-      postCollected[postId] = false
+      postCollected[this.data.articleId] = false
       wx.setStorageSync('post_collected', postCollected)
     }
-    if(postSupported){
-      var postSupported = postSupported[postId]
+  },
+
+  onCollectionTap: function(event) {
+    if (app.globalData.wxAccount != null) {
+      var postsCollected = wx.getStorageSync('post_collected') //获取当前缓存值
+      var postCollected = postsCollected[this.data.articleId]
+      postCollected = !postCollected //收藏变成未收藏，未收藏变成收藏
+      postsCollected[this.data.articleId] = postCollected //修改文章收藏状态缓存值
+      wx.setStorageSync('post_collected', postsCollected) //更新文章是否收藏缓存值
+      //更新数据绑定变量，从而实现切换图片
       this.setData({
-        supported: postSupported
+        collected: postCollected
+      })
+      wx.showToast({
+        title: postCollected ? '收藏成功' : '取消成功',
       })
     }
-    else{
-      var postSupported = {}
-      postSupported[postId] = false
-      wx.setStorageSync('post_supported', postSupported)
+  },
+  onSupportTap: function(event) {
+    if (app.globalData.wxAccount != null) {
+      var _that = this
+      if (this.data.supported){
+        wx.request({
+          url: app.globalData.urlPath + 'article/delete/support',
+          data: {
+            id: app.globalData.wxAccount.id,
+            articleid: this.data.articleId
+          },
+          header: {
+            'Authorization': app.globalData.token
+          },
+          method: 'get',
+          success(res) {
+            _that.setData({
+              supported: res.data.data
+            })
+          },
+          fail: error => function () {
+            console.log(error)
+          }
+        })
+      }
+
+      else{
+      wx.request({
+        url: app.globalData.urlPath + 'article/add/support',
+        data: {
+          id: app.globalData.wxAccount.id,
+          articleid: this.data.articleId
+        },
+        header: {
+          'Authorization': app.globalData.token
+        },
+        method: 'get',
+        success(res) {
+          _that.setData({
+            supported: res.data.data
+          })
+        },
+        fail: error => function() {
+          console.log(error)
+        }
+
+      })
+      }
     }
-    if(postConcerned){
-      var postConcerned = postConcerned[authorId]
-      this.setData({
-        concerned: postConcerned
+  },
+
+  onConcernTap: function(event) {
+    if (app.globalData.wxAccount != null) {
+      var _that = this
+      if (!_that.data.concerned){
+      wx.request({
+        url: app.globalData.urlPath + 'add/follow',
+        data:{
+          id: app.globalData.wxAccount.id,
+          followid: this.data.authorId
+        },
+        header: {
+          'Authorization': app.globalData.token
+        },
+        method: 'get',
+        success(res) {
+          _that.setData({
+            concerned: !_that.data.concerned
+          })
+        },
+        fail: error => function () {
+          console.log(error)
+        }
+      }) 
+    }
+  
+    else{
+      wx.request({
+        url: app.globalData.urlPath + 'delete/follow' + '?id=' + app.globalData.wxAccount.id + '&followid=' + this.data.authorId,
+        data: {
+          // id: app.globalData.wxAccount.id,
+          // followid: this.data.authorId
+        },
+        header: {
+          'Authorization': app.globalData.token
+        },
+        method: 'delete',
+        success(res) {
+          _that.setData({
+            concerned: !_that.data.concerned
+          })
+
+        },
+        fail: error => function () {
+          console.log(error)
+        }
       })
     }
-    else{
-      var postConcerned = {}
-      postConcerned[authorId] = false
-      wx.setStorageSync('post_concerned', postConcerned)
+      wx.showToast({
+        title: this.data.concerned ? '取消成功' : '关注成功',
+      })
     }
-
   },
-
-  onCollectionTap:function(event){
-    var postsCollected = wx.getStorageSync('post_collected') //获取当前缓存值
-    var postCollected = postsCollected[this.data.currentPostId]
-    postCollected = !postCollected //收藏变成未收藏，未收藏变成收藏
-    postsCollected[this.data.currentPostId] = postCollected //修改文章收藏状态缓存值
-    wx.setStorageSync('post_collected', postsCollected)  //更新文章是否收藏缓存值
-    //更新数据绑定变量，从而实现切换图片
-    this.setData({
-      collected: postCollected
-    })
-    wx.showToast({
-      title: postCollected?'收藏成功':'取消成功',
-    })
-  },
-
-  onSupportTap:function(event){
-    var postsSupported = wx.getStorageSync('post_supported')
-    var postSupported = postsSupported[this.data.currentPostId]
-    postSupported = !postSupported
-    postsSupported[this.data.currentPostId] = postSupported
-    wx.setStorageSync('post_supported', postsSupported)
-    this.setData({
-      supported: postSupported
-    })
-  },
-
-  onConcernTap:function(event){
-    var postsConcerned = wx.getStorageSync('post_concerned')
-    var postConcerned = postsConcerned[this.data.currentAuthorId]
-    postConcerned = !postConcerned
-    postsConcerned[this.data.currentAuthorId] = postConcerned
-    wx.setStorageSync('post_concerned', postsConcerned)
-    this.setData({
-      concerned: postConcerned
-    })
-    wx.showToast({
-      title: postConcerned ? '关注成功' : '取消成功',
-    })
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   }
 })

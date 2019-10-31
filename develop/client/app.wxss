@@ -3,5 +3,5 @@
 
 text{
   font-family: Microsoft Yahei;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }

@@ -23,7 +23,7 @@ App({
           method: 'post',
           success: function(res) {
             console.log(res.data)
-            _that.globalData.wxAccount = res.data.wxAccount
+            _that.globalData.wxAccount = res.data
           },
           fail: function(res) {
             //token失效
@@ -97,11 +97,11 @@ App({
   },
   globalData: {
     userInfo: null,
-    urlPath: 'http://47.98.231.146:8080/api/wx/',
+    urlPath: 'https://spring.jnugeek.cn/api/wx/',
     //token要设置请求头中  
     token: null,
     //代表后端中用户信息，请求用这个 wxOpenid,或者id
     wxAccount: null,
-    imgpath: 'http://47.98.231.146:8080/'
+    imgPath: 'https://spring.jnugeek.cn/'
   }
 })

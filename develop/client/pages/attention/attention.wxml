@@ -1,8 +1,8 @@
 <!--pages/attention/attention.wxml-->
 
 <block wx:for="{{posts_key}}" wx:for-item="item">
-  <view wx:if="{{concerned[item.authorId]}}" class="post_author" >
-    <image class="author_img" src="{{item.author_img}}"></image>
-    <text>{{item.author_name}}</text>
+  <view class="post_author" >
+    <image class="author_img" src="{{item.avatarUrl}}"></image>
+    <text>{{item.nickname}}</text>
   </view>
 </block>
