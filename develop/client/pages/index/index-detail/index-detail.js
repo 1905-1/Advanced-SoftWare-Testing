@@ -44,7 +44,7 @@ Page({
       'nickName': article.nickName,
       'content': article.article.content,
       'coverimg': article.article.coverimg,
-      'supported': article.issupported,
+      'supported': article.issupport,
       'concerned': article.isconcerned,
       'details': article.article.details
     })
@@ -80,13 +80,14 @@ Page({
   },
   onSupportTap: function(event) {
     if (app.globalData.wxAccount != null) {
+      console.log(this.data)
       var _that = this
       if (this.data.supported){
         wx.request({
           url: app.globalData.urlPath + 'article/delete/support',
           data: {
             id: app.globalData.wxAccount.id,
-            articleid: this.data.articleId
+            articleid: _that.data.articleId
           },
           header: {
             'Authorization': app.globalData.token
@@ -94,7 +95,7 @@ Page({
           method: 'get',
           success(res) {
             _that.setData({
-              supported: res.data.data
+              supported:!_that.data.supported
             })
           },
           fail: error => function () {
@@ -108,7 +109,7 @@ Page({
         url: app.globalData.urlPath + 'article/add/support',
         data: {
           id: app.globalData.wxAccount.id,
-          articleid: this.data.articleId
+          articleid: _that.data.articleId
         },
         header: {
           'Authorization': app.globalData.token
@@ -116,7 +117,7 @@ Page({
         method: 'get',
         success(res) {
           _that.setData({
-            supported: res.data.data
+            supported: !_that.data.supported
           })
         },
         fail: error => function() {

@@ -22,12 +22,12 @@
   <text class="detail">{{details}}</text>
   <view class="suggestion">
     <view class="fee">
-      <text>人均消费:</text>
+      <text class="text_title">人均消费:</text>
       <text>{{fee}}</text>
       <text>元</text>
     </view>
     <view class="playtime">
-      <text>游玩时间</text>
+      <text class="text_title">游玩时间:</text>
       <text>{{playtime}}</text>
       <text>min</text>
     </view>
