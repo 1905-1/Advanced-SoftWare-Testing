@@ -132,6 +132,9 @@
   color: #4b556c;
 }
 
+.text_title{
+  margin-right: 20rpx;
+}
 
 
 

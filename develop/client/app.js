@@ -55,7 +55,7 @@ App({
 
               //如果没有token，用户已经授权登录的情况下，就请求token
               if (_that.isTokenUseful == false){
-                UserLogin();
+                _that.UserLogin(_that);
               }
             }
           })
@@ -63,28 +63,28 @@ App({
       }
     })
   },
-  UserLogin: function() {
+  UserLogin: function(thats) {
     //插入登录的用户的相关信息到数据库
     wx.login({
       success(res) {
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: this.globalData.urlPath + 'user/login',
+            url: thats.globalData.urlPath + 'user/login',
             data: JSON.stringify({
               code: res.code,
-              userInfo: this.globalData.userInfo
+              userInfo: thats.globalData.userInfo
             }),
             method: 'post',
             header: {
-              'content-type': 'application/json'
+              'content-type': 'application/json',
             },
             success: function(res) {
               console.log("插入小程序登录用户信息成功！");
               console.log(res);
               //保存token
-              this.globalData.token = res.data.token;
-              this.globalData.wxAccount = res.data.account;
+              thats.globalData.token = res.data.token;
+              thats.globalData.wxAccount = res.data.account;
               wx.setStorageSync("token", res.data.token);
             },
             fail: function(error) {
@@ -97,11 +97,11 @@ App({
   },
   globalData: {
     userInfo: null,
-    urlPath: 'https://spring.jnugeek.cn/api/wx/',
+    urlPath: 'https://47.98.231.146/api/wx/',
     //token要设置请求头中  
     token: null,
     //代表后端中用户信息，请求用这个 wxOpenid,或者id
     wxAccount: null,
-    imgPath: 'https://spring.jnugeek.cn/'
+    imgPath: 'https://47.98.231.146/'
   }
 })
