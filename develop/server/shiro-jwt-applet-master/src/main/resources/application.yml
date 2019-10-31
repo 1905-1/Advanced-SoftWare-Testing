@@ -11,10 +11,9 @@ spring:
       ddl-auto: update      # 请自行修改 请自行修改 请自行修改
     open-in-view: false     # 关闭 OSIV
 
-
 #  datasource本地配置
   datasource:
-    url: jdbc:mysql://localhost:3306/shopping
+    url: jdbc:mysql://localhost:3306/shopping?characterEncoding=utf-8
     username: root
     password: 123456@cc
     driver-class-name: com.mysql.jdbc.Driver
@@ -24,9 +23,21 @@ spring:
     database: 0
     host: localhost
     port: 6379
+server:
+  port: 443
+  tomcat:
+    max-connections: 800
+    accept-count: 30000
+    min-spare-threads: 20
+  ssl:
+    key-store: classpath:3014422_spring.jnugeek.cn.pfx
+    key-store-password: tu0894bS
+    key-store-type: PKCS12
+    enabled: true
+
 
 #  微信小程序配置 appid /appsecret
 wx:
   applet:
-    appid: xxxxxxxxx
-    appsecret: xxxxxxxx
+    appid: wxff7fc7244fca9391
+    appsecret: cac3b0e6cd88cbeac0e8346f726bf928

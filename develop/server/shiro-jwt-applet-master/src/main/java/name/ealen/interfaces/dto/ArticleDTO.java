@@ -19,6 +19,8 @@ public class ArticleDTO {
     private String coverimg;
     //内容
     private String content;
+    //详细内容
+    private String details;
     //点赞数
     private int supportnum;
     //游览时长
@@ -54,6 +56,14 @@ public class ArticleDTO {
 
     public String getDate() {
         return date;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getCoverimg() {

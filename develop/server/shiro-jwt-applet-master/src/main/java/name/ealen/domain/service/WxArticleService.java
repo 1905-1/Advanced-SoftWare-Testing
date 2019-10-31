@@ -29,7 +29,6 @@ import java.util.List;
 @Transactional
 public class WxArticleService implements ArticleService {
 
-
     @Resource
     private ArticleRepository articleRepository;
     @Resource
@@ -45,13 +44,23 @@ public class WxArticleService implements ArticleService {
     }
 
     public List<ArticleResponse> proccessArticle(List<Article> result,int lookUserId){
-        WxAccount me = wxAccountRepository.findById(lookUserId);
+        WxAccount me = null;
+        if(lookUserId!=-1) {
+            me = wxAccountRepository.findById(lookUserId);
+        }
         Iterator<Article> iterator = result.iterator();
         List<ArticleResponse> responses = new ArrayList<>();
         while (iterator.hasNext()){
             Article article = iterator.next();
             ArticleResponse articleResponse = new ArticleResponse(article);
-            articleResponse.setIssupport(article.getSupportusers().contains(me));
+            articleResponse.setNickName(article.getWxAccount().getNickname());
+            articleResponse.setAvatarUrl(article.getWxAccount().getAvatarUrl());
+            articleResponse.setAddress(article.getAddress());
+            if(me!=null){
+                articleResponse.setIssupport(article.getSupportusers().contains(me));
+                articleResponse.setIsconcerned(article.getWxAccount().getFocusers().contains(me));
+            }
+            articleResponse.setAuthorId(article.getWxAccount().getId());
             responses.add(articleResponse);
         }
 
@@ -98,21 +107,7 @@ public class WxArticleService implements ArticleService {
     public Article addArticle(ArticleDTO article) {
         Article result = null;
         Article input = new Article();
-        input.setCoverimg(article.getCoverimg());
-        Address address = new Address();
-        address.setAddressId(article.getAddressId());
-        input.setAddress(address);
-        input.setContent(article.getContent());
-        Date date = new Date();
-        input.setDate(date);
-        input.setFee(article.getFee());
-        input.setHotnum(article.getHotnum());
-        input.setTitle(article.getTitle());
-        input.setPlaytime(article.getPlaytime());
-        input.setSupportnum(article.getSupportnum());
-        WxAccount account = new WxAccount();
-        account.setId(article.getId());
-        input.setWxAccount(account);
+        input.setArticle(article);
         result = articleRepository.save(input);
         return result;
     }
@@ -153,7 +148,7 @@ public class WxArticleService implements ArticleService {
     public int removeSupportUser(int id,int articleid){
         Article article = articleRepository.findByArticleId(articleid);
         WxAccount wxAccount = wxAccountRepository.findById(id);
-        if(!article.getSupportusers().contains(wxAccount)){
+        if(article.getSupportusers().contains(wxAccount)){
             article.getSupportusers().remove(wxAccount);
             article.setSupportnum(article.getSupportusers().size());
         }

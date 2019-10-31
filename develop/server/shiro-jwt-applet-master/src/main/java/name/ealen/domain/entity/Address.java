@@ -1,5 +1,6 @@
 package name.ealen.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -58,6 +59,7 @@ public class Address {
         this.fee = fee;
     }
 
+    @JsonBackReference
     public List<Article> getArticleList() {
         return articleList;
     }

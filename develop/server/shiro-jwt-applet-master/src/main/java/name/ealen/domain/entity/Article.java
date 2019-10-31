@@ -3,6 +3,7 @@ package name.ealen.domain.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import name.ealen.interfaces.dto.ArticleDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -30,8 +31,12 @@ public class Article {
     //封面图片
     @Column(nullable = false,name = "coverimg")
     private String coverimg;
-    //内容
+    //封面内容
     private String content;
+    //文章详细内容
+    @Lob
+    @Column(name = "details",length = 10000,columnDefinition = "Text")
+    private String details;
     //点赞数
     @Column(name = "supportnum")
     private int supportnum;
@@ -49,6 +54,14 @@ public class Article {
 
     public void setHotnum(long hotnum) {
         this.hotnum = hotnum;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     //一对多 一篇文章对应一个用户
@@ -167,5 +180,24 @@ public class Article {
     @JsonBackReference
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void setArticle(ArticleDTO articleDTO){
+        setCoverimg(articleDTO.getCoverimg());
+        Address address = new Address();
+        address.setAddressId(articleDTO.getAddressId());
+        setAddress(address);
+        setContent(articleDTO.getContent());
+        Date date = new Date();
+        setDate(date);
+        setFee(articleDTO.getFee());
+        setHotnum(articleDTO.getHotnum());
+        setTitle(articleDTO.getTitle());
+        setPlaytime(articleDTO.getPlaytime());
+        setSupportnum(articleDTO.getSupportnum());
+        setDetails(articleDTO.getDetails());
+        WxAccount account = new WxAccount();
+        account.setId(articleDTO.getId());
+        setWxAccount(account);
     }
 }

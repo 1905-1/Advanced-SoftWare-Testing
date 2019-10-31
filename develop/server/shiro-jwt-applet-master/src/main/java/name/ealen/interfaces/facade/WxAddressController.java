@@ -18,7 +18,6 @@ import javax.annotation.Resource;
  * 小程序后台 API
  */
 @RestController
-@RequiresAuthentication
 public class WxAddressController {
     @Resource
     private WxAddressSevice wxAddressSevice;
@@ -32,6 +31,7 @@ public class WxAddressController {
         return new ResponseEntity<>(new ResponseMsg(ResponseMsg.OK,wxAddressSevice.getAll(),""), HttpStatus.OK);
     }
 
+    @RequiresAuthentication
     @PostMapping("/api/wx/address/addOne")
     public ResponseEntity wxaddOneAddress(@RequestBody Address address) {
         return new ResponseEntity<>(new ResponseMsg(ResponseMsg.OK,wxAddressSevice.add(address),""), HttpStatus.OK);

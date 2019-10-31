@@ -27,7 +27,6 @@ import java.util.List;
  * 小程序获取 API
  */
 @RestController
-@RequiresAuthentication
 public class WxArticleController {
 
     @Resource
@@ -38,6 +37,7 @@ public class WxArticleController {
      * @param article
      * @return
      */
+    @RequiresAuthentication
     @PostMapping("/api/wx/article/add")
     public ResponseEntity wxArticleAdd(ArticleDTO article, @RequestParam("img")MultipartFile imgFile, HttpServletRequest request, HttpSession session) {
         if(imgFile.isEmpty()){
@@ -80,7 +80,7 @@ public class WxArticleController {
      * @return
      */
     @GetMapping("/api/wx/article/hot")
-    public ResponseMsg wxArticleGetHot(@RequestParam int page,@RequestParam int size,@RequestParam int lookUserId,HttpServletRequest request) {
+    public ResponseMsg wxArticleGetHotByPage(@RequestParam int page,@RequestParam int size,@RequestParam int lookUserId,HttpServletRequest request) {
         return new ResponseMsg(ResponseMsg.OK,articleService.getHotArticle(page,size,lookUserId),"");
     }
 
@@ -133,11 +133,13 @@ public class WxArticleController {
     }
 
     //文章点赞
+    @RequiresAuthentication
     @GetMapping("/api/wx/article/add/support")
     public ResponseMsg wxArticleSupport(@RequestParam int id,@RequestParam int articleid,HttpServletRequest request){
         return new ResponseMsg(ResponseMsg.OK,articleService.addSupportUser(id,articleid),"");
     }
     //取消文章点赞
+    @RequiresAuthentication
     @GetMapping("/api/wx/article/delete/support")
     public ResponseMsg wxArticleDeleteSupport(@RequestParam int id,@RequestParam int articleid,HttpServletRequest request){
         return new ResponseMsg(ResponseMsg.OK,articleService.removeSupportUser(id,articleid),"");

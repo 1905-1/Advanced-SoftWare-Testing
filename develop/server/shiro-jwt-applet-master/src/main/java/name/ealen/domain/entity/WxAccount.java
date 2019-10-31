@@ -48,14 +48,16 @@ public class WxAccount {
 
     //用户自身关注的多对多
     //JoinTable生成一个中间表
+    //关注的人
     @JsonIgnore
     @ManyToMany(cascade = { CascadeType.PERSIST })
     @JoinTable(name = "follow",joinColumns = @JoinColumn(name = "followerID"),
             inverseJoinColumns = @JoinColumn(name = "focusID"))
     private List<WxAccount> followers;
 
+    //粉丝
     @JsonIgnore
-    @ManyToMany(cascade = { CascadeType.PERSIST })
+    @ManyToMany(cascade = { CascadeType.PERSIST})
     @JoinTable(name = "follow",joinColumns = @JoinColumn(name = "focusID"),
             inverseJoinColumns = @JoinColumn(name = "followerID"))
     private List<WxAccount> focusers;

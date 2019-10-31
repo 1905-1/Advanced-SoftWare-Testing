@@ -11,6 +11,7 @@ import name.ealen.interfaces.dto.FollowerMsg;
 import name.ealen.interfaces.dto.TokenDTO;
 import name.ealen.interfaces.dto.wxUserInfo;
 import org.apache.shiro.authc.AuthenticationException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -72,7 +73,9 @@ public class WxAccountService implements WxAppletService {
     public WxAccount addFollow(int id,int focuserid){
         WxAccount wxAccount = wxAccountRepository.findById(id);
         WxAccount focuser = wxAccountRepository.findById(focuserid);
-        wxAccount.getFocusers().add(focuser);
+        if(!wxAccount.getFollowers().contains(focuser)){
+            wxAccount.getFollowers().add(focuser);
+        }
         wxAccountRepository.save(wxAccount);
         return wxAccount;
     }
@@ -80,14 +83,19 @@ public class WxAccountService implements WxAppletService {
     public WxAccount removerFollow(int id,int focuserid){
         WxAccount wxAccount = wxAccountRepository.findById(id);
         WxAccount focuser = wxAccountRepository.findById(focuserid);
-        wxAccount.getFocusers().remove(focuser);
+        if(wxAccount.getFollowers().contains(focuser)){
+            wxAccount.getFollowers().remove(focuser);
+        }
         wxAccountRepository.save(wxAccount);
         return wxAccount;
     }
 
+    @Transactional
     public List<WxAccount> GetAllFollower(int id){
         WxAccount wxAccount = wxAccountRepository.findById(id);
-        List<WxAccount> result =  wxAccount.getFollowers();
+
+        Hibernate.initialize(wxAccount.getFollowers());
+        List<WxAccount> result = wxAccount.getFollowers();
         return result;
     }
 
