@@ -115,6 +115,7 @@
 .playtime{
   margin-left: 30rpx;
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
   display: flex;
   flex-direction: row;
 }
@@ -136,6 +137,34 @@
   margin-right: 20rpx;
 }
 
+.route{
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+  margin-right: 30rpx;
+}
+
+.route text{
+  color: #4b556c;
+}
+
+.steps{
+  margin-left: 20rpx;
+}
+
+.distance_duration{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+}
+
+.distance{
+  margin-right: 50rpx;
+}
+
+.distance_duration text{
+  color: #4b556c;
+}
 
 
 

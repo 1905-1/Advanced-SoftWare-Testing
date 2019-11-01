@@ -68,7 +68,7 @@ Page({
       data: {
         page: 0,
         size: 10,
-        lookUserId: app.globalData.wxAccount.id
+        lookUserId: app.globalData.wxAccount == null ? -1 : app.globalData.wxAccount.id
       },
       header: {
         'Authorization': app.globalData.token
