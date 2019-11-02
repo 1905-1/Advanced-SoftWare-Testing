@@ -211,7 +211,9 @@ Page({
             res.data.data[i].article.coverimg = (app.globalData.imgPath).slice(0, -1) + res.data.data[i].article.coverimg
             res.data.data[i].article.date = String(res.data.data[i].article.date).split('T')[0]
           }
-          _that.data.posts_key.concat(res.data.data)
+          _that.setData({
+            posts_key: _that.data.posts_key.concat(res.data.data)
+          })
         },
         fail: error => function() {
           console.log(error)
