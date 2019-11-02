@@ -30,8 +30,8 @@ server:
     accept-count: 30000
     min-spare-threads: 20
   ssl:
-    key-store: classpath:3022372_www.aabub.cn.pfx
-    key-store-password: Y1xVIO9D
+    key-store: xxxxxxxxxxxxxxxxx
+    key-store-password: xxxxxxxxxxxxxxxxxx
     key-store-type: PKCS12
     enabled: true
 
@@ -39,5 +39,5 @@ server:
 #  微信小程序配置 appid /appsecret
 wx:
   applet:
-    appid: wxff7fc7244fca9391
-    appsecret: cac3b0e6cd88cbeac0e8346f726bf928
+    appid: xxxxxxxxxxxxxxx
+    appsecret: xxxxxxxxxxxxxxxxxxxx
