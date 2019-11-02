@@ -1,0 +1,75 @@
+/* pages/index/add-detail/add-detail.wxss */
+
+.title{
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.coverimg{
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.content{
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fee{
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.playtime{
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+input{
+  margin-left: 30rpx;
+  border: 1px solid #ededed;
+}
+
+.wrap{
+  align-items: center;
+  margin-top: 150rpx;
+}
+
+.content-input{
+  margin-left: 30rpx;
+  border: 1px solid #ededed;
+  width: 70%;
+}
+
+text{
+  color: #4b556c;
+}
+
+button{
+  width: 70%;
+  border: 1px solid #ededed;
+}
+
+.button-wrap{
+  margin-top: 100rpx;
+}
+
+
+.coverimg button{
+  width: 25%;
+}

@@ -1,0 +1,28 @@
+<!--pages/index/add-detail/add-detail.wxml-->
+<view>
+  <view class="wrap">
+    <view class="title">
+      <text>文章标题:</text>
+      <input class="title-input" bindinput="title"/>
+    </view>
+    <view class="coverimg">
+      <text>封面图片:</text>
+      <button type="default" size="mini" bindtap="chooseImage" >添加图片</button>
+    </view>
+    <view class="content">
+      <text>文章详情:</text>
+      <textarea class="content-input" bindinput="detail" maxlength="1000"/>
+    </view>
+    <view class="fee">
+      <text>人均消费:</text>
+      <input class="fee-input" bindinput="fee"/>
+    </view>
+    <view class="playtime">
+      <text>游玩时间:</text>
+      <input class="playtime-input" bindinput="playtime"/>
+    </view>
+  </view>
+  <view class="button-wrap">
+    <button class="submit" bindtap="postArticle">发布</button>
+  </view>
+</view>

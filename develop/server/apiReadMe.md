@@ -303,3 +303,54 @@ JSON
 > http://127.0.0.1:8080/api/wx/article/view?articleid=1
 #### 请求参数
 int articleid 文章id
+
+### 8.相似地名文章查询
+做文章搜索使用，用户输入相似的文章
+#### 获取方式
+Http GET
+#### 数据格式
+JSON
+#### 请求URL
+> app.globalData.urlPath + /api/wx/article/view <br>
+示例:
+> http://127.0.0.1:8080/api/wx/article/view?articleid=1
+#### 请求参数
+string likename 地点名字
+int page 分页查询第几页
+int size 每次每页的大小
+int lookUserId 查看文章的用户Id 未登录填写-1
+#### 请求返回参数
+```
+{
+    "status": 1,
+    "data": [
+        {
+            "article": {
+                "articleId": 3,
+                "title": "世界上\"最长\"的步行街---武汉光谷步行街",
+                "date": "2019-10-25T09:09:49.000+0000",
+                "coverimg": "/upload/imgs/guanggu.jpg",
+                "content": "光谷步行街 在武汉市洪山区，总建筑面积约150万平方米，现如今已经成为了武汉年轻人最聚集，标志的地方。",
+                "details": "世界城·光谷步行街位于湖北省武汉市武昌光谷广场，沿旧关山路一直延伸到关山大道，总占地面积41.79万平方米，总建筑面积约150万平方米。\n2008年1月，总体量20万平方米，消费客群定位于周边上百万大学生和刚参加工作的工薪阶层的世界城光谷步行街一期现代风情街开业；\n2011年1月，长329米、由6栋3-5层高的极具西班牙特色建筑组成的西班牙风情街开业",
+                "supportnum": 1,
+                "playtime": 112,
+                "fee": 120,
+                "hotnum": 62
+            },
+            "issupport": false,
+            "isconcerned": false,
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/eUmX4rvUyJREkGRm8TL2pWcYj9eHPg35ianRlZdPibdkOPwIAppBz3icgn41A1Xyv6NWb1SyXFjTjbrKHznoBl21Q/132",
+            "nickName": "Chenh",
+            "address": {
+                "addressId": "GG001",
+                "desc": "光谷步行街",
+                "playtime": 120,
+                "fee": 112
+            },
+            "authorId": 1
+        }
+    ],
+    "msg": ""
+}
+```
+

@@ -97,11 +97,13 @@ App({
   },
   globalData: {
     userInfo: null,
-    urlPath: 'https://47.98.231.146/api/wx/',
+    // urlPath: 'https://47.98.231.146/api/wx/',
+    urlPath: 'http://47.98.231.146:52364/api/wx/',
     //token要设置请求头中  
     token: null,
     //代表后端中用户信息，请求用这个 wxOpenid,或者id
     wxAccount: null,
-    imgPath: 'https://47.98.231.146/'
+    // imgPath: 'https://47.98.231.146/'
+    imgPath: 'http://47.98.231.146:52364/'
   }
 })

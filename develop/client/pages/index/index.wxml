@@ -19,4 +19,7 @@
       <template is="postItem" data="{{...item}}" />
     </view>
   </block>
+  <view bindtap="adddetail">
+    <image class="add-icon"src="/images/icon/write.png"></image>
+  </view>
 </view>

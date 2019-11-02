@@ -19,15 +19,35 @@ Page({
 
   search: function(value) {
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve([{
-          text: '搜索结果',
-          value: 1
-        }, {
-          text: '搜索结果2',
-          value: 2
-        }])
-      }, 200)
+      // setTimeout(() => {
+      //   resolve([{
+      //     text: '搜索结果',
+      //     value: 1
+      //   }, {
+      //     text: '搜索结果2',
+      //     value: 2
+      //   }])
+      // }, 200)
+      wx.request({
+        url: app.globalData.urlPath + 'article/like/address',
+        data: {
+          likename: value,
+          lookUserId: app.globalData.wxAccount.id,
+          page: 0,
+          size: 10
+        },
+        header: {
+          'Authorization': app.globalData.token
+        },
+        method: 'get',
+        success: function (res) {
+          // 回调成功执行resolve
+          console.log(res)
+        },
+        fail: function (err) {
+          console.log(err)
+        },
+      })
     })
   },
   selectResult: function(e) {
@@ -65,6 +85,12 @@ Page({
       url: 'index-detail/index-detail?articleStr=' + encodeURIComponent(articleStr)
     })
 
+  },
+
+  adddetail:function(){
+    wx.navigateTo({
+      url: './add-detail/add-detail',
+    })
   },
 
   /**
@@ -125,6 +151,7 @@ Page({
       }
     })
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
