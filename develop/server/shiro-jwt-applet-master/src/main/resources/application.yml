@@ -30,8 +30,8 @@ server:
     accept-count: 30000
     min-spare-threads: 20
   ssl:
-    key-store: classpath:3014422_spring.jnugeek.cn.pfx
-    key-store-password: tu0894bS
+    key-store: classpath:3022372_www.aabub.cn.pfx
+    key-store-password: Y1xVIO9D
     key-store-type: PKCS12
     enabled: true
 
