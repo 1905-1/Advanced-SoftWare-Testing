@@ -72,6 +72,7 @@ Page({
             _that.setData({
               posts_key: res.data.data
             })
+            page = 10
           } else {
             wx.request({
               url: app.globalData.urlPath + 'article/hot',
@@ -98,6 +99,7 @@ Page({
                 console.log(error)
               }
             })
+            page = 0
           }
         },
 
