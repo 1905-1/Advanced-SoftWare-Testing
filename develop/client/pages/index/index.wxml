@@ -19,7 +19,10 @@
       <template is="postItem" data="{{...item}}" />
     </view>
   </block>
-  <view bindtap="adddetail">
-    <image class="add-icon"src="/images/icon/write.png"></image>
   </view>
+   <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <view bindtap="adddetail">
+    <image class="add-icon" src="/images/icon/write.png"></image>
 </view>

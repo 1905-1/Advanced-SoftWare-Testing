@@ -27,8 +27,8 @@ Page({
       sourceType: ['album', 'camera'], // 可选择性开放访问相册、相机
       success: function(res) {
         const images = _that.data.images.concat(res.tempFilePaths)
-        // 限制最多只能留下3张照片
-        _that.data.images = images.length == 1 ? images : images.slice(0, 1)
+        // 限制只能添加1张照片
+        _that.data.images = images.length == 1 ? images : images[0]
         console.log(_that.data.images)
         _that.setData({
           choosed: true
@@ -108,26 +108,27 @@ Page({
       },
       success(res) {
         console.log(res);
-        if (res.statusCode == 200){
+        if (res.statusCode == 200) {
           _that.setData({
             uploaded: true
           })
-        }
-        else{
+        } else {
           _that.setData({
             uploaded: false
           })
         }
       },
-      complete: function (res) {
+      complete: function(res) {
         wx.showToast({
           title: _that.data.uploaded ? '发布成功' : '发布失败',
         })
+        if (_that.data.uploaded) {
+          wx.navigateBack({
+
+          })
+        }
       },
     })
-
-
-
   },
 
   /**
