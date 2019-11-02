@@ -127,8 +127,8 @@ public class WxArticleController {
     }
 
     //模糊查询
-    @GetMapping("/api/wx/article/addresslike")
-    public ResponseMsg wxArticleGetHotAddressLike(String likename,int page,int size,int lookUserId,HttpServletRequest request){
+    @GetMapping("/api/wx/article/like/address")
+    public ResponseMsg wxArticleGetHotAddressLike(@RequestParam String likename,@RequestParam int page,@RequestParam int size,@RequestParam int lookUserId,HttpServletRequest request){
         return new ResponseMsg(ResponseMsg.OK,articleService.getArticleAddressLike(likename,page,size,lookUserId),"");
     }
 
